@@ -20,11 +20,7 @@ const kepentinganOptions = [
   'Sangat Tidak Penting',
 ];
 
-<<<<<<< HEAD
 const jenisKosOptions = ['putra', 'putri', 'semua'];
-=======
-const jenisKosOptions = ['putra', 'putri', 'campur'];
->>>>>>> 2a02faad8cd902e30520f6939523dac72928d907
 
 export default function Main() {
   const router = useRouter();
@@ -116,10 +112,7 @@ export default function Main() {
       keamanan: getWeightNumber(pref.keamanan),
     };
     const sum = Object.values(raw).reduce((a, b) => a + b, 0) || 1;
-<<<<<<< HEAD
     console.log('input preferensi', raw);
-=======
->>>>>>> 2a02faad8cd902e30520f6939523dac72928d907
     return Object.fromEntries(
       Object.entries(raw).map(([k, v]) => [k, v / sum])
     ) as unknown as typeof raw; // semua bobot dijamin sum=1
@@ -225,10 +218,7 @@ export default function Main() {
       if (!targetJenis || targetJenis === 'campur') return true;
       return jk.toLowerCase() === targetJenis;
     };
-<<<<<<< HEAD
     console.log('w preferensi', w);
-=======
->>>>>>> 2a02faad8cd902e30520f6939523dac72928d907
 
     // .filter((a) => filterJenis(a.jenis_kos))
     return scored
@@ -253,15 +243,11 @@ export default function Main() {
     const filteredTipeKos = ranking.filter(
       (item) => item.jenis_kos === preferensi.jenis_kos
     );
-<<<<<<< HEAD
     if (preferensi.jenis_kos == 'semua') {
       setHasilAkhir(ranking);
     } else {
       setHasilAkhir(filteredTipeKos);
     }
-=======
-    setHasilAkhir(filteredTipeKos);
->>>>>>> 2a02faad8cd902e30520f6939523dac72928d907
     setVisibleCount(3);
   };
 
