@@ -41,6 +41,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Admin created', admin });
   } catch (error) {
     console.error('CREATE ADMIN ERROR:', error);
+<<<<<<< HEAD
     return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
+=======
+    return NextResponse.json(
+      { error: 'Registration failed' },
+      { status: 500 }
+    );
+>>>>>>> fec07d22291b9693559843b7c0cbd9ee7af64c3f
   }
 }
