@@ -24,17 +24,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         status: 'success',
         user: { id: admin.id_admin, email: admin.email, role: 'admin' },
-<<<<<<< HEAD
         token: jwt.sign({ id: admin.id_admin, role: 'admin' }, jwtSecret, {
           expiresIn: '1d',
         }),
-=======
-        token: jwt.sign(
-          { id: admin.id_admin, role: 'admin' },
-          jwtSecret,
-          { expiresIn: '1d' }
-        ),
->>>>>>> fec07d22291b9693559843b7c0cbd9ee7af64c3f
       });
     }
 
@@ -66,17 +58,9 @@ export async function POST(req: NextRequest) {
           email: pengguna.email,
           role: 'pengguna',
         },
-<<<<<<< HEAD
         token: jwt.sign({ id: pengguna.id_user, role: 'pengguna' }, jwtSecret, {
           expiresIn: '1d',
         }),
-=======
-        token: jwt.sign(
-          { id: pengguna.id_user, role: 'pengguna' },
-          jwtSecret,
-          { expiresIn: '1d' }
-        ),
->>>>>>> fec07d22291b9693559843b7c0cbd9ee7af64c3f
       });
     }
 
