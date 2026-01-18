@@ -139,65 +139,198 @@ export default function TambahTipe({ onSuccess }: TambahTipeProps) {
   };
 
   return (
-    <form onSubmit={handleUpload} className="grid grid-cols-3 gap-4">
-      <input
-        type="text"
-        placeholder="Nama Tipe"
-        value={nama_tipe}
-        onChange={(e) => setNama_tipe(e.target.value)}
-        className="border p-2 col-span-1"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Jenis Kos"
-        value={jenis_kos}
-        onChange={(e) => setJenis_kos(e.target.value)}
-        className="border p-2 col-span-1"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Harga"
-        value={harga}
-        onChange={(e) => setHarga(Number(e.target.value))}
-        className="border p-2 col-span-1"
-        required
-      />
-      <input
-        type="number"
-        placeholder="Jarak (m)"
-        value={jarak}
-        onChange={(e) => setJarak(Number(e.target.value))}
-        className="border p-2 col-span-1"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Luas Kamar (contoh: 3x4)"
-        value={luas_kamar}
-        onChange={(e) => setLuas_kamar(e.target.value)}
-        className="border p-2 col-span-1"
-        required
-      />
-      <input
-        type="text"
-        placeholder="Jam Malam"
-        value={jam_malam}
-        onChange={(e) => setJam_malam(e.target.value)}
-        className="border p-2 col-span-1"
-        required
-      />
+    <div className="flex flex-col justify-start items-center">
+      <div className="space-y-4">
+        <h2 className="text-xl font-bold text-slate-800">Tambah Tipe Kos</h2>
 
-      {/* File upload */}
-      <input type="file" onChange={handleFileChange} className="col-span-3" />
+        <form onSubmit={handleUpload} className="grid grid-cols-3 gap-4">
+          {/* input biasa */}
+          <div className="col-span-3 grid grid-cols-3 gap-3">
+            <div>
+              <label className="text-gray-500">Nama Tipe</label>
+              <input
+                type="text"
+                placeholder="Nama Tipe Kos"
+                value={nama_tipe}
+                onChange={(e) => setNama_tipe(e.target.value)}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-gray-500">jenis Kos</label>
+              <input
+                type="text"
+                placeholder="Jenis Kos"
+                value={jenis_kos}
+                onChange={(e) => setJenis_kos(e.target.value)}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-gray-500">Harga</label>
+              <input
+                type="number"
+                placeholder="Harga"
+                value={harga}
+                onChange={(e) => setHarga(Number(e.target.value))}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-gray-500">Jarak</label>
+              <input
+                type="number"
+                placeholder="Jarak Kos Ke Kampus"
+                value={jarak}
+                onChange={(e) => setJarak(Number(e.target.value))}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-gray-500">Luas kamar</label>
+              <input
+                type="text"
+                placeholder="Format 3x4"
+                value={luas_kamar}
+                onChange={(e) => setLuas_kamar(e.target.value)}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-gray-500">Jam Malam</label>
+              <input
+                type="text"
+                placeholder="Jam Malam"
+                value={jam_malam}
+                onChange={(e) => setJam_malam(e.target.value)}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+          </div>
 
-      <button
-        type="submit"
-        className="col-span-3 bg-blue-500 text-white p-2 rounded"
-        disabled={loading || uploading}>
-        {loading ? 'Menyimpan...' : 'Simpan'}
-      </button>
-    </form>
+          {/* ✅ Checklist fasilitas_kamar */}
+          <div className="col-span-3 gap-2 grid grid-cols-3">
+            <div className="">
+              <h3 className="font-semibold text-slate-700">Fasilitas Kamar</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {Object.keys(fasilitas_kamar).map((key) => (
+                  <label
+                    key={key}
+                    className="flex items-center gap-2 text-gray-500">
+                    <input
+                      type="checkbox"
+                      className="text-gray-500"
+                      checked={
+                        fasilitas_kamar[key as keyof typeof fasilitas_kamar]
+                      }
+                      onChange={() =>
+                        handleCheckbox(setFasilitas_kamar, fasilitas_kamar, key)
+                      }
+                    />
+                    {key}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* ✅ Checklist fasilitas_umum */}
+            <div className="">
+              <h3 className="font-semibold text-slate-700">Fasilitas Umum</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {Object.keys(fasilitas_umum).map((key) => (
+                  <label
+                    key={key}
+                    className="flex items-center gap-2 text-gray-500">
+                    <input
+                      type="checkbox"
+                      checked={
+                        fasilitas_umum[key as keyof typeof fasilitas_umum]
+                      }
+                      onChange={() =>
+                        handleCheckbox(setFasilitas_umum, fasilitas_umum, key)
+                      }
+                    />
+                    {key}
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* ✅ Checklist keamanan */}
+            <div className="">
+              <h3 className="font-semibold text-slate-700">Keamanan</h3>
+              <div className="grid grid-cols-1 gap-1">
+                {Object.keys(keamanan).map((key) => (
+                  <label
+                    key={key}
+                    className="flex items-center gap-2 text-gray-500">
+                    <input
+                      type="checkbox"
+                      checked={keamanan[key as keyof typeof keamanan]}
+                      onChange={() =>
+                        handleCheckbox(setKeamanan, keamanan, key)
+                      }
+                    />
+                    {key}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* input lainnya */}
+          <div className="col-span-3 grid grid-cols-3 gap-2">
+            <div>
+              <label className="text-gray-500">Jumlah Kamar</label>
+              <input
+                type="number"
+                placeholder="Jumlah Kamar Kos"
+                value={jmlh_kamar}
+                onChange={(e) => setJmlh_kamar(Number(e.target.value))}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-gray-500">Kamar Terisi</label>
+              <input
+                type="number"
+                placeholder="Kamar yang Sudah Terisi"
+                value={kmr_terisi}
+                onChange={(e) => setKmr_terisi(Number(e.target.value))}
+                className="w-full p-2 border rounded text-slate-800"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="picture" className="text-gray-500">
+                PICTURE
+              </label>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="w-full p-2 border rounded text-slate-800"
+              />
+            </div>
+          </div>
+
+          {/* Tombol */}
+          <div className="col-span-3 col-start-3 ">
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-500 text-white p-2 rounded">
+              {loading ? 'Menyimpan...' : 'Simpan'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
