@@ -1,11 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-export const config = {
-  api: {
-    bodyParser: false, // Disable bodyParser to handle large files
-  },
-};
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 // Menangani POST request
 export async function POST(req: Request) {
