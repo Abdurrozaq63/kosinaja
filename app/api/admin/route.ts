@@ -3,47 +3,44 @@ import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
-//GET: mengambil data admin
+// GET: ambil data admin
 export async function GET() {
-  const admins = await prisma.admin.findMany();
-  return NextResponse.json(admins);
+  try {
+    const admins = await prisma.admin.findMany();
+    return NextResponse.json(admins);
+  } catch (error) {
+    console.error('GET ADMIN ERROR:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch admin' },
+      { status: 500 }
+    );
+  }
 }
-export async function POST(req: Request) {
+
+// POST: tambah admin
+export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
-    const existinguser = await prisma.admin.findUnique({ where: { email } });
-    if (existinguser) {
+
+    const existing = await prisma.admin.findUnique({ where: { email } });
+    if (existing) {
       return NextResponse.json(
         { error: 'Email already in use' },
         { status: 400 }
       );
     }
 
-    //hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const admin = await prisma.admin.create({
       data: { email, password: hashedPassword },
     });
-    return NextResponse.json({
-      message: 'admin registered succcessfully',
-      admin,
-    });
-  } catch {
-    return NextResponse.json({ error: 'registration failed' }, { status: 500 });
-  }
-}
 
-export async function PUT(req: NextRequest) {
-  const body = await req.json();
-  const hashedPassword = await bcrypt.hash(body.password, 10);
-  const updated = await prisma.admin.update({
-    where: { id_admin: body.id_admin },
-    data: {
-      email: body.email,
-      password: hashedPassword,
-    },
-  });
-  return NextResponse.json(updated);
+    return NextResponse.json({ message: 'Admin created', admin });
+  } catch (error) {
+    console.error('CREATE ADMIN ERROR:', error);
+    return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
+  }
 }
