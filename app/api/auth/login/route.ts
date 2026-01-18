@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-const prisma = new PrismaClient();
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();

@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import mime from 'mime-types'; // Menambahkan mime-types untuk mendapatkan ekstensi file
 
 export const config = {
   api: {

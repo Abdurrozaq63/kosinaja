@@ -1,7 +1,8 @@
 // app/api/riwayat_user/[id_user]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   const { id_user } = await req.json();
