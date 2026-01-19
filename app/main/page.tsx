@@ -268,10 +268,10 @@ export default function Main() {
     setOpenModal('detail');
   };
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full px-4 sm:px-6 flex flex-col items-center">
       {/* Header */}
-      <div className="w-full px-5 py-4 mt-2">
-        <h1 className="text-slate-800 font-semibold text-3xl tracking-tight">
+      <div className="w-full max-w-5xl px-2 sm:px-0 py-4 mt-2">
+        <h1 className="text-xl sm:text-3xl font-semibold text-slate-800 tracking-tight">
           🎯 Rekomendasi Kos
         </h1>
         <p className="text-gray-500 text-sm mt-1">
@@ -280,9 +280,9 @@ export default function Main() {
       </div>
 
       {/* Preferensi */}
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md p-6">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold text-slate-700">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md p-4 sm:p-6 mt-3">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <h2 className="text-lg font-semibold text-slate-700 mb-2 sm:mb-0">
             Preferensi Rekomendasi
           </h2>
           <button
@@ -294,8 +294,8 @@ export default function Main() {
         </div>
 
         {isOpen && (
-          <form onSubmit={handlePreference} className="mt-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <form onSubmit={handlePreference} className="mt-4 sm:mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {[
                 'harga',
                 'jarak',
@@ -305,14 +305,14 @@ export default function Main() {
                 'keamanan',
               ].map((kriteria) => (
                 <div key={kriteria} className="flex flex-col">
-                  <label className="block font-medium capitalize text-gray-700 mb-1">
+                  <label className="block font-medium capitalize text-gray-700 mb-1 text-sm sm:text-base">
                     {kriteria.replace('_', ' ')}
                   </label>
                   <select
                     name={kriteria}
                     value={(preferensi as any)[kriteria]}
                     onChange={handleChange}
-                    className="w-full rounded-xl border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-gray-500">
+                    className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-gray-500">
                     <option value="" className="text-gray-500">
                       Pilih tingkat kepentingan
                     </option>
@@ -329,14 +329,14 @@ export default function Main() {
               ))}
 
               <div className="flex flex-col">
-                <label className="block font-medium text-gray-700 mb-1">
+                <label className="block font-medium text-gray-700 mb-1 text-sm sm:text-base">
                   Jenis Kos
                 </label>
                 <select
                   name="jenis_kos"
                   value={preferensi.jenis_kos}
                   onChange={handleChange}
-                  className="w-full rounded-xl border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-gray-500">
+                  className="w-full rounded-xl border border-gray-300 px-3 py-2 text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-gray-500">
                   <option value="">Pilih jenis kos</option>
                   {jenisKosOptions.map((option) => (
                     <option
@@ -350,11 +350,10 @@ export default function Main() {
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
               <button
                 type="submit"
-                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-xl shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-700 transition font-medium">
-                {/* 💾  */}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl shadow hover:shadow-lg hover:from-blue-600 hover:to-blue-700 transition font-medium w-full sm:w-auto text-center">
                 Proses
               </button>
             </div>
@@ -363,7 +362,7 @@ export default function Main() {
       </div>
 
       {/* Hasil */}
-      <div className="w-full max-w-5xl mt-6">
+      <div className="w-full max-w-5xl mt-6 flex flex-col gap-4 sm:gap-5">
         <h3 className="text-slate-700 font-semibold text-xl">
           ✨ Hasil Rekomendasi
         </h3>
@@ -377,17 +376,14 @@ export default function Main() {
           return (
             <div
               key={index}
-              className="w-full bg-white shadow-sm hover:shadow-md transition rounded-2xl p-5 flex gap-5 mt-5 border-2 border-gray-200">
+              className="w-full bg-white shadow-sm hover:shadow-md transition rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-3 sm:gap-5 border-2 border-gray-200">
               {/* Gambar */}
-              <div className="relative w-96 aspect-[5/3] bg-gray-200 rounded-xl overflow-hidden">
-                {/* Background blur */}
+              <div className="relative w-full sm:w-96 aspect-[5/3] bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                 <img
                   src={`/api/upimg/${kos.nama_tipe + kos.id_kos}`}
                   alt="Background Blur"
                   className="absolute inset-0 w-full h-full object-cover blur-sm scale-110"
                 />
-
-                {/* Gambar utama */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <img
                     src={`/api/upimg/${kos.nama_tipe + kos.id_kos}`}
@@ -399,7 +395,7 @@ export default function Main() {
 
               {/* Info */}
               <div className="flex-1 flex flex-col justify-between">
-                <div className="grid md:grid-cols-2 gap-4 text-gray-500">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-500">
                   {/* Kolom 1 */}
                   <div>
                     <p className="text-gray-500 text-sm">Nama Kos</p>
@@ -417,7 +413,6 @@ export default function Main() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sky-500 flex justify-start items-center cursor-pointer">
-                      {' '}
                       <MapPin className="w-4 h-4 text-slate-500 mr-2" />
                       Lihat Map
                     </a>
@@ -442,10 +437,10 @@ export default function Main() {
                 </div>
 
                 {/* Tombol */}
-                <div className="flex gap-3 mt-5">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-5">
                   <button
                     onClick={() => handleDetail(kos.id_tipe)}
-                    className="px-4 py-2 rounded-xl bg-blue-500 text-white font-medium shadow hover:bg-blue-600 transition">
+                    className="px-4 py-2 rounded-xl bg-blue-500 text-white font-medium shadow hover:bg-blue-600 transition w-full sm:w-auto text-center">
                     🔍 Detail
                   </button>
                   <button
@@ -456,7 +451,7 @@ export default function Main() {
                         handleSimpan(kos.id_tipe);
                       }
                     }}
-                    className={`px-4 py-2 rounded-xl font-medium shadow transition ${
+                    className={`px-4 py-2 rounded-xl font-medium shadow transition w-full sm:w-auto text-center ${
                       isSaved
                         ? 'bg-red-500 text-white hover:bg-red-600'
                         : 'bg-green-500 text-white hover:bg-green-600'
@@ -468,16 +463,18 @@ export default function Main() {
             </div>
           );
         })}
+
         {visibleCount < hasilAkhir.length && (
           <div className="text-center mt-4">
             <button
               onClick={() => setVisibleCount((prev) => prev + 3)}
-              className="px-5 py-2 mb-4 bg-blue-600 text-white rounded-lg hober:bg-blue-700 transition">
+              className="px-5 py-2 mb-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
               Tampilkan Lebih Banyak
             </button>
           </div>
         )}
       </div>
+
       {/* Modal */}
       <Modal isOpen={openModal !== null} onClose={handleClose}>
         {openModal === 'detail' && selectedId_Tipe && (

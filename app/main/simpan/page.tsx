@@ -61,16 +61,16 @@ export default function Simpan() {
   const handleClose = () => setOpenModal(null);
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full px-4 sm:px-6 flex flex-col items-center">
       {/* Header */}
-      <div className="w-full p-4 text-center mt-2">
-        <h1 className="text-slate-700 text-start ml-6 text-2xl font-bold tracking-wide">
+      <div className="w-full p-4 text-center sm:text-left mt-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-700 tracking-wide">
           Kos yang Disimpan
         </h1>
       </div>
 
       {/* Data Kos */}
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-5xl flex flex-col gap-4 sm:gap-5">
         {kosSimpan.length === 0 ? (
           <p className="text-slate-500 text-center mt-6 text-lg">
             Tidak ada kos yang disimpan
@@ -82,9 +82,9 @@ export default function Simpan() {
             return (
               <div
                 key={kos.id_tipe}
-                className="w-full rounded-2xl shadow-md bg-white p-5 flex flex-col md:flex-row gap-6 mt-5 hover:shadow-lg transition-shadow">
+                className="w-full rounded-2xl shadow-md bg-white p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-6 mt-5 hover:shadow-lg transition-shadow">
                 {/* Gambar */}
-                <div className="relative w-96 aspect-[5/3] bg-gray-200 rounded-xl overflow-hidden">
+                <div className="relative w-full sm:w-96 aspect-[5/3] bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
                   <img
                     src={`/api/upimg/${kos.nama_tipe + kos.id_kos}`}
                     alt="Background Blur"
@@ -101,7 +101,7 @@ export default function Simpan() {
 
                 {/* Info */}
                 <div className="flex-1 flex flex-col justify-between">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     {/* Kolom 1 */}
                     <div>
                       <p className="font-semibold text-slate-700">Nama Kos</p>
@@ -155,17 +155,17 @@ export default function Simpan() {
                   </div>
 
                   {/* Tombol */}
-                  <div className="flex gap-3 mt-5">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-5">
                     <button
                       onClick={() => handleDetail(kos.id_tipe)}
-                      className="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition">
+                      className="bg-sky-600 hover:bg-sky-700 text-white px-4 py-2 rounded-lg shadow-sm font-medium w-full sm:w-auto text-center transition">
                       Detail
                     </button>
                     <button
                       onClick={() =>
                         handleBatalSimpan(kos.simpan[0]?.id_simpan, kos.id_tipe)
                       }
-                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-sm font-medium transition">
+                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-sm font-medium w-full sm:w-auto text-center transition">
                       Batal Simpan
                     </button>
                   </div>

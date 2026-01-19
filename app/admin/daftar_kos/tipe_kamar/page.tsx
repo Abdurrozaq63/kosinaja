@@ -43,9 +43,10 @@ export default function TipeKos() {
   }, [idKosSelect]);
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <div className="w-full max-w-5xl p-5 mt-6 bg-white shadow-md rounded-xl border">
-        <h1 className="text-slate-700 text-2xl font-bold">
+    <div className="w-full flex flex-col items-center px-4 sm:px-6">
+      {/* Header */}
+      <div className="w-full max-w-5xl p-4 sm:p-5 mt-6 bg-white shadow-md rounded-xl border">
+        <h1 className="text-slate-700 text-xl sm:text-2xl font-bold">
           {kosSelect?.nama_kos}
         </h1>
         <p className="text-slate-500 text-sm mt-1">
@@ -53,12 +54,14 @@ export default function TipeKos() {
         </p>
       </div>
 
-      <div className="w-full mt-6">
+      {/* List tipe kos */}
+      <div className="w-full mt-6 flex flex-col gap-4 sm:gap-5">
         {tipeKosSelect.map((kos) => (
           <div
             key={kos.id_tipe}
-            className="w-full bg-white shadow-sm hover:shadow-md transition rounded-2xl p-5 flex gap-5 mt-5 border-2 border-gray-200">
-            <div className="relative w-72 aspect-[5/3] bg-gray-200 rounded-xl overflow-hidden">
+            className="w-full bg-white shadow-sm hover:shadow-md transition rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-3 sm:gap-5 border-2 border-gray-200">
+            {/* Gambar kos */}
+            <div className="relative w-full sm:w-72 aspect-[5/3] bg-gray-200 rounded-xl overflow-hidden flex-shrink-0">
               <Image
                 src={`/api/upimg/${kos.nama_tipe + kos.id_kos}`}
                 alt="Background"
@@ -78,8 +81,9 @@ export default function TipeKos() {
               </div>
             </div>
 
+            {/* Detail kos */}
             <div className="flex-1 flex flex-col justify-between">
-              <div className="grid md:grid-cols-3 gap-4 text-gray-500">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-gray-500">
                 <div>
                   <p className="text-sm mt-2">Tipe Kos</p>
                   <p className="font-semibold">{kos.nama_tipe}</p>
@@ -100,7 +104,8 @@ export default function TipeKos() {
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-5">
+              {/* Tombol detail */}
+              <div className="flex justify-start sm:justify-end gap-3 mt-4 sm:mt-5">
                 <button
                   onClick={() => {
                     setSelectedId_Tipe(kos.id_tipe);
@@ -115,6 +120,7 @@ export default function TipeKos() {
         ))}
       </div>
 
+      {/* Modal */}
       <Modal isOpen={openModal !== null} onClose={() => setOpenModal(null)}>
         {openModal === 'detail' && selectedId_Tipe && (
           <Detail

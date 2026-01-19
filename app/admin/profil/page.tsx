@@ -72,11 +72,13 @@ export default function ProfilPage() {
   };
 
   return (
-    <div className="w-full">
-      <div className="w-3/6 mx-auto p-6">
-        <h1 className="text-2xl font-bold text-slate-700 mb-6">Profil Admin</h1>
+    <div className="w-full px-4 sm:px-6">
+      <div className="w-full max-w-md sm:max-w-lg mx-auto p-4 sm:p-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-700 mb-4 sm:mb-6">
+          Profil Admin
+        </h1>
 
-        <div className="bg-white shadow-xl rounded-2xl p-6 space-y-6 border">
+        <div className="bg-white shadow-xl rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-6 border">
           {/* Email */}
           <div>
             <label className="block text-sm text-gray-500 mb-1">Email</label>
@@ -86,10 +88,12 @@ export default function ProfilPage() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2"
+                className="w-full border rounded-lg px-3 py-2 text-sm sm:text-base"
               />
             ) : (
-              <p className="text-lg font-medium text-gray-800">{user?.email}</p>
+              <p className="text-base sm:text-lg font-medium text-gray-800">
+                {user?.email}
+              </p>
             )}
           </div>
 
@@ -97,23 +101,24 @@ export default function ProfilPage() {
           <div>
             <label className="block text-sm text-gray-500 mb-1">Password</label>
             {isEditing ? (
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={form.password}
                   onChange={handleChange}
-                  className="w-full border rounded-lg px-3 py-2"
+                  className="w-full border rounded-lg px-3 py-2 text-sm sm:text-base"
                 />
                 <button
                   type="button"
+                  className="mt-2 sm:mt-0"
                   onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <EyeOff /> : <Eye />}
                 </button>
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <p className="text-lg font-medium text-gray-800">
+                <p className="text-base sm:text-lg font-medium text-gray-800">
                   {showPassword ? user?.password : '••••••••'}
                 </p>
                 <button
@@ -126,24 +131,24 @@ export default function ProfilPage() {
           </div>
 
           {/* Action */}
-          <div className="flex justify-end gap-3">
+          <div className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3">
             {isEditing ? (
               <>
                 <button
                   onClick={() => setIsEditing(false)}
-                  className="px-4 py-2 bg-gray-200 rounded-lg">
+                  className="px-4 py-2 bg-gray-200 rounded-lg flex items-center justify-center gap-1 text-sm sm:text-base">
                   <X size={18} /> Batal
                 </button>
                 <button
                   onClick={handleSave}
-                  className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center justify-center gap-1 text-sm sm:text-base">
                   <Save size={18} /> Simpan
                 </button>
               </>
             ) : (
               <button
                 onClick={() => setIsEditing(true)}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg">
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg flex items-center justify-center gap-1 text-sm sm:text-base">
                 <Edit3 size={18} /> Edit Profil
               </button>
             )}

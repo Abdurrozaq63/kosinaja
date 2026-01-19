@@ -119,34 +119,38 @@ export default function Pengajuan() {
 
   return (
     <div className="w-full flex flex-col min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <div className="w-full px-6 py-6 mb-4 border-b shadow-sm">
-        <h1 className="text-3xl font-bold text-slate-800">Pengajuan Kos</h1>
+      {/* Header */}
+      <div className="w-full px-4 sm:px-6 py-4 sm:py-6 mb-4 border-b shadow-sm">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-800">
+          Pengajuan Kos
+        </h1>
         <p className="text-sm text-gray-500">Daftar Kos Pengajuan Terbaru</p>
       </div>
 
-      <div className="w-full flex justify-center px-3">
-        <div className="w-full bg-white shadow-lg rounded-2xl overflow-hidden border">
+      {/* Tabel pengajuan */}
+      <div className="w-full px-3 overflow-x-auto">
+        <div className="min-w-[600px] sm:min-w-full bg-white shadow-lg rounded-2xl overflow-hidden border">
           <table className="w-full text-sm text-left text-gray-600">
             <thead className="bg-violet-600 text-white">
               <tr>
-                <th className="px-4 py-3">Nama Kos</th>
-                <th className="px-4 py-3">No Telepon</th>
-                <th className="px-4 py-3">Alamat</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3 text-center">Aksi</th>
+                <th className="px-3 sm:px-4 py-2 sm:py-3">Nama Kos</th>
+                <th className="px-3 sm:px-4 py-2 sm:py-3">No Telepon</th>
+                <th className="px-3 sm:px-4 py-2 sm:py-3">Alamat</th>
+                <th className="px-3 sm:px-4 py-2 sm:py-3">Email</th>
+                <th className="px-3 sm:px-4 py-2 sm:py-3 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {pengajuan.map((p) => (
                 <tr key={p.id_pengajuan} className="border-b">
-                  <td className="px-4 py-3">{p.nama_kos}</td>
-                  <td className="px-4 py-3">{p.notelp}</td>
-                  <td className="px-4 py-3">{p.alamat}</td>
-                  <td className="px-4 py-3">{p.email}</td>
-                  <td className="px-4 py-3 text-center">
+                  <td className="px-3 sm:px-4 py-2 sm:py-3">{p.nama_kos}</td>
+                  <td className="px-3 sm:px-4 py-2 sm:py-3">{p.notelp}</td>
+                  <td className="px-3 sm:px-4 py-2 sm:py-3">{p.alamat}</td>
+                  <td className="px-3 sm:px-4 py-2 sm:py-3">{p.email}</td>
+                  <td className="px-3 sm:px-4 py-2 sm:py-3 text-center">
                     <button
                       onClick={() => handleVerifikasi(p.id_pengajuan)}
-                      className="px-3 py-1 bg-violet-600 text-white rounded-lg hover:bg-violet-700">
+                      className="px-2 sm:px-3 py-1 sm:py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700">
                       Konfirmasi
                     </button>
                   </td>
@@ -156,7 +160,7 @@ export default function Pengajuan() {
                 <tr>
                   <td
                     colSpan={5}
-                    className="px-4 py-6 text-center text-gray-400">
+                    className="px-3 sm:px-4 py-4 sm:py-6 text-center text-gray-400">
                     Tidak ada data pengajuan
                   </td>
                 </tr>
@@ -166,11 +170,14 @@ export default function Pengajuan() {
         </div>
       </div>
 
+      {/* Modal */}
       <Modal isOpen={openModal !== null} onClose={handleClose}>
         {openModal === 'verifikasi' && (
           <div>
-            <h2 className="text-lg font-semibold mb-6">Konfirmasi Pengajuan</h2>
-            <div className="flex justify-between">
+            <h2 className="text-lg font-semibold mb-4 sm:mb-6">
+              Konfirmasi Pengajuan
+            </h2>
+            <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-4">
               <button
                 onClick={handleTerima}
                 className="px-4 py-2 bg-green-600 text-white rounded-lg">
